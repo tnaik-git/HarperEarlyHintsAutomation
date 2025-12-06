@@ -1,4 +1,4 @@
-# 🌐 Harper EarlyHints & Redirect Automation
+# Harper EarlyHints & Redirect Automation
 
 Automation framework for deploying the full Harper EarlyHints + Redirect stack across Akamai GTM, Property Manager (internal + customer-facing), and EdgeWorkers.
 
@@ -17,7 +17,7 @@ This tool streamlines all required Akamai workflows into a **single Python-based
 
 ---
 
-# 🚀 1. Prerequisites
+# 1. Prerequisites
 
 ### ✔ Python 3.8+
 ### ✔ Akamai EdgeGrid credentials
@@ -32,7 +32,7 @@ client_secret = ...
 access_token = ...
 ```
 
-### ✔ Install dependencies
+### Install dependencies
 
 ```
 pip install requests akamai-edgegrid
@@ -40,7 +40,7 @@ pip install requests akamai-edgegrid
 
 ---
 
-# 📁 2. Project Structure
+# 2. Project Structure
 
 ```
 harperEarlyAutomation/
@@ -64,7 +64,7 @@ harperEarlyAutomation/
 
 ---
 
-# 🧩 3. Configuration (requirements.json)
+# 3. Configuration (requirements.json)
 
 You must provide (or the tool will prompt for) required fields.
 
@@ -118,7 +118,7 @@ Example:
 
 ---
 
-# 🛠 4. Running the Automation
+# 4. Running the Automation
 
 ### Basic usage:
 
@@ -136,11 +136,11 @@ python3 main.py --activation-network <staging|production|saveonly> \
 
 ---
 
-# 🔄 5. What the Script Does
+# 5. What the Script Does
 
 Each run executes these components **in order**:
 
-### 1️⃣ GTM Workflow
+###  GTM Workflow
 - Detect if GTM domain exists
 - Create domain (unless contractAccessProblem → manual prompt)
 - Load datacenters from CSV
@@ -148,7 +148,7 @@ Each run executes these components **in order**:
 - Create/Update GTM property
 - Wait for propagation
 
-### 2️⃣ Internal PM Workflow
+### Internal PM Workflow
 - Create CP Code  
 - Create internal PM config  
 - Add Edge Hostname  
@@ -158,14 +158,14 @@ Each run executes these components **in order**:
 - Upload new version  
 - Activate if staging/production  
 
-### 3️⃣ EdgeWorker Workflow
+### EdgeWorker Workflow
 - Update main.js by injecting Harper token + hostname  
 - Create .tgz bundle  
 - Create EdgeWorker ID  
 - Upload version  
 - Activate (unless saveonly)  
 
-### 4️⃣ Customer-Facing PM Workflow
+### Customer-Facing PM Workflow
 - Fetch rule tree for customer-facing property  
 - Inject Harper Redirect + EarlyHints rule  
 - Insert Harper rule before Conditional Origins / Advanced Override  
@@ -175,7 +175,7 @@ Each run executes these components **in order**:
 
 ---
 
-# 📄 6. Output (result.json)
+# 6. Output (result.json)
 
 Each run appends an object:
 
@@ -193,7 +193,7 @@ Each run appends an object:
 
 ---
 
-# 🧪 7. Verbose Logging
+# 7. Verbose Logging
 
 Enable detailed output:
 
@@ -209,7 +209,7 @@ Shows:
 
 ---
 
-# ❗ Troubleshooting
+# Troubleshooting
 
 ### 403 on GTM Domain Creation
 You may need to manually create the GTM domain. The script will prompt you.
@@ -226,7 +226,7 @@ The script interactively updates requirements.json.
 
 ---
 
-# 🎉 Summary
+# Summary
 
 This automation fully deploys:
 
