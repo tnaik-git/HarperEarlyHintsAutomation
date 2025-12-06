@@ -1,0 +1,13 @@
+{
+    "edgeworker-version": "1.0",
+    "description" : "harper-redirect-prod -- Redirect and Early hints",
+    "config": {
+        "logging": {
+            "level": "error"
+        },
+        "subrequest": {
+            "invoke-for-edgeworker-clients": false
+        },
+        "client-ip-header": false
+    }
+}

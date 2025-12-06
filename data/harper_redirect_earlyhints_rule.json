@@ -1,0 +1,64 @@
+{
+    "name": "Harper Redirects and Early Hints",
+    "children": [
+      {
+        "name": "EdgeWorker Enable",
+        "children": [],
+        "behaviors": [
+          {
+            "name": "edgeWorker",
+            "options": {
+              "continueOnError": true,
+              "continueOnErrorDisclaimer": "",
+              "createEdgeWorker": "",
+              "edgeWorkerId": "{{EW_ID}}",
+              "enabled": true,
+              "failOpenTitle": "",
+              "mPulse": false,
+              "mPulseInformation": "",
+              "mPulseTitle": "",
+              "resourceTier": ""
+            }
+          }
+        ],
+        "criteria": [],
+        "criteriaMustSatisfy": "any",
+        "comments": ""
+      },
+      {
+        "name": "Early Hints",
+        "children": [],
+        "behaviors": [
+          {
+            "name": "earlyHints",
+            "options": {
+              "enabled": true,
+              "resourceUrl": "{{user.PMUSER_103_HINTS}}"
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "name": "matchVariable",
+            "options": {
+              "matchCaseSensitive": true,
+              "matchOperator": "IS_ONE_OF",
+              "matchWildcard": false,
+              "variableName": "PMUSER_103_HINTS_ENABLED",
+              "variableValues": [
+                "true",
+                "True"
+              ]
+            }
+          }
+        ],
+        "criteriaMustSatisfy": "all",
+        "comments": ""
+      }
+    ],
+    "behaviors": [],
+    "criteria": [],
+    "criteriaMustSatisfy": "all",
+    "comments": ""
+  }
+  

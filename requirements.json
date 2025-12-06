@@ -1,0 +1,46 @@
+{
+  "activationEmails":"tnaik@akamai.com",
+  "changesBasedOnVersion#":1,
+
+  "accountId": "act_1-6JHGX",
+  "contractId": "ctr_1-1NC95D",
+  "groupId": "grp_191342",
+
+  "datacenterDetails": "data/datacenters.csv",
+  "gtmPropertyName": "test8-gtm",
+  "gtmDomain": "tnaik1.com.hdb.akadns.net",
+  "livenessHostHeader": "mcy-pb-prod-gtm.harperdbcloud.com",
+  "livenessTestObject": "/status",
+
+  "propertyManager": {
+      "productId": "prd_SPM",
+      "ruleFormat": "latest",
+
+      "customerFacingHostname": {
+          "propertyName": "testharper.191342.tnaik-ion-standard",
+          "propertyVersion": 1,
+
+          "propertyHostnames": [
+              "qa-ion-standard.tnaik.com"
+          ]
+      },
+
+      "internalHarperHostname": {
+        "internalPmConfigName":"23internal-harper-xxx.test.com",
+        "internalHostname": "internal-harper-xxx.test.com",
+        "edgeHostname": "ion-standard.tnaik.com.edgekey.net",
+    
+        "originHostname": "edm-rd-prod-gtm.edmunds.com.hdb.akadns.net",
+        "forwardCustomHeader": "edm-rd-prod-gtm.harperdbcloud.com"
+      }
+      
+  },
+
+  "edgeworker": {
+      "name": "Harper-Earlyhints1",
+      "description": "harperEarlyhints",
+      "resourceTierId": 200,
+      "tgz": "examples/versions-post.tgz",
+      "harper_token": "xxxxxxx"
+  }
+}

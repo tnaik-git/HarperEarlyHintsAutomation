@@ -1,0 +1,800 @@
+{
+    "customerFacingPropertyId": "prp_1293814",
+    "customerFacingPropertyVersion": 1,
+    "propertyManager": null,
+    "edgeworker": {
+        "edgeWorkerId": 103630,
+        "version": "1.0",
+        "activation": "skipped (saveonly)"
+    },
+    "harperRule": {
+        "newVersion": 4,
+        "updateResponse": {
+            "accountId": "act_1-6JHGX",
+            "contractId": "ctr_1-1NC95D",
+            "groupId": "grp_191342",
+            "propertyId": "prp_1293814",
+            "propertyName": "testharper.191342.tnaik-ion-standard",
+            "propertyVersion": 4,
+            "etag": "b0e4e723714f2db35a00f64c8218ba274e5afa9e",
+            "rules": {
+                "name": "default",
+                "children": [
+                    {
+                        "name": "Augment insights",
+                        "children": [
+                            {
+                                "name": "Traffic reporting",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "cpCode",
+                                        "options": {
+                                            "enableDefaultContentProviderCode": false,
+                                            "value": {
+                                                "id": 1929674,
+                                                "description": "testharper.191342.tnaik-ion-standard",
+                                                "products": [
+                                                    "Fresca"
+                                                ],
+                                                "createdDate": 1764912062000,
+                                                "cpCodeLimits": {
+                                                    "limit": 10000,
+                                                    "currentCapacity": 794,
+                                                    "limitType": "account"
+                                                },
+                                                "name": "testharper.191342.tnaik-ion-standard"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Identify your main traffic segments so you can granularly zoom in your traffic statistics like hits, bandwidth, offload, response codes, and errors."
+                            },
+                            {
+                                "name": "mPulse RUM",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "mPulse",
+                                        "options": {
+                                            "apiKey": "",
+                                            "bufferSize": "",
+                                            "configOverride": "",
+                                            "enabled": true,
+                                            "loaderVersion": "V12",
+                                            "requirePci": false,
+                                            "titleOptional": ""
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Collect and analyze real-user data to monitor the performance of your website."
+                            },
+                            {
+                                "name": "Geolocation",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "edgeScape",
+                                        "options": {
+                                            "enabled": false
+                                        }
+                                    }
+                                ],
+                                "criteria": [
+                                    {
+                                        "name": "requestType",
+                                        "options": {
+                                            "matchOperator": "IS",
+                                            "value": "CLIENT_REQ"
+                                        }
+                                    }
+                                ],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Receive data about a user's geolocation and connection speed in a request header. If you change cached content based on the values of the X-Akamai-Edgescape request header, contact your account representative."
+                            },
+                            {
+                                "name": "Log delivery",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "report",
+                                        "options": {
+                                            "logAcceptLanguage": false,
+                                            "logCookies": "OFF",
+                                            "logCustomLogField": false,
+                                            "logEdgeIP": false,
+                                            "logHost": false,
+                                            "logReferer": false,
+                                            "logUserAgent": false,
+                                            "logXForwardedFor": false
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Specify the level of detail you want to be logged in your Log Delivery Service reports. Log User-Agent Header to obtain detailed information in the Traffic by Browser and OS report."
+                            }
+                        ],
+                        "behaviors": [],
+                        "criteria": [],
+                        "criteriaMustSatisfy": "all",
+                        "comments": "Control the settings related to monitoring and reporting. This gives you additional visibility into your traffic and audiences."
+                    },
+                    {
+                        "name": "Accelerate delivery",
+                        "children": [
+                            {
+                                "name": "Origin connectivity",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "dnsAsyncRefresh",
+                                        "options": {
+                                            "enabled": true,
+                                            "timeout": "1h"
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Optimize the connection between edge and origin."
+                            },
+                            {
+                                "name": "Protocol optimizations",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "enhancedAkamaiProtocol",
+                                        "options": {
+                                            "display": ""
+                                        }
+                                    },
+                                    {
+                                        "name": "http3",
+                                        "options": {
+                                            "enable": true
+                                        }
+                                    },
+                                    {
+                                        "name": "http2",
+                                        "options": {
+                                            "enabled": ""
+                                        }
+                                    },
+                                    {
+                                        "name": "allowTransferEncoding",
+                                        "options": {
+                                            "enabled": true
+                                        }
+                                    },
+                                    {
+                                        "name": "sureRoute",
+                                        "options": {
+                                            "enableCustomKey": false,
+                                            "enabled": true,
+                                            "forceSslForward": false,
+                                            "raceStatTtl": "30m",
+                                            "srDownloadLinkTitle": "",
+                                            "testObjectUrl": "/akamai/sureroute-test-object.html",
+                                            "toHostStatus": "INCOMING_HH",
+                                            "type": "PERFORMANCE"
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Serve your website using modern and fast protocols."
+                            },
+                            {
+                                "name": "Prefetching",
+                                "children": [
+                                    {
+                                        "name": "Prefetching objects",
+                                        "children": [
+                                            {
+                                                "name": "Bots",
+                                                "children": [],
+                                                "behaviors": [
+                                                    {
+                                                        "name": "prefetch",
+                                                        "options": {
+                                                            "enabled": false
+                                                        }
+                                                    }
+                                                ],
+                                                "criteria": [
+                                                    {
+                                                        "name": "userAgent",
+                                                        "options": {
+                                                            "matchCaseSensitive": false,
+                                                            "matchOperator": "IS_ONE_OF",
+                                                            "matchWildcard": true,
+                                                            "values": [
+                                                                "*bot*",
+                                                                "*crawl*",
+                                                                "*spider*"
+                                                            ]
+                                                        }
+                                                    }
+                                                ],
+                                                "criteriaMustSatisfy": "all",
+                                                "comments": "Disable prefetching for specific clients identifying themselves as bots and crawlers. This avoids requesting unnecessary resources from the origin."
+                                            }
+                                        ],
+                                        "behaviors": [
+                                            {
+                                                "name": "prefetch",
+                                                "options": {
+                                                    "enabled": true
+                                                }
+                                            }
+                                        ],
+                                        "criteria": [],
+                                        "criteriaMustSatisfy": "all",
+                                        "comments": "Define for which HTML pages prefetching should be enabled."
+                                    },
+                                    {
+                                        "name": "Prefetchable objects",
+                                        "children": [],
+                                        "behaviors": [
+                                            {
+                                                "name": "prefetchable",
+                                                "options": {
+                                                    "enabled": true
+                                                }
+                                            }
+                                        ],
+                                        "criteria": [
+                                            {
+                                                "name": "fileExtension",
+                                                "options": {
+                                                    "matchCaseSensitive": false,
+                                                    "matchOperator": "IS_ONE_OF",
+                                                    "values": [
+                                                        "css",
+                                                        "js",
+                                                        "jpg",
+                                                        "jpeg",
+                                                        "jp2",
+                                                        "png",
+                                                        "gif",
+                                                        "svg",
+                                                        "svgz",
+                                                        "webp",
+                                                        "eot",
+                                                        "woff",
+                                                        "woff2",
+                                                        "otf",
+                                                        "ttf"
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "criteriaMustSatisfy": "all",
+                                        "comments": "Define which resources should be prefetched."
+                                    }
+                                ],
+                                "behaviors": [],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Instruct edge servers to retrieve embedded resources before the browser requests them."
+                            },
+                            {
+                                "name": "Adaptive acceleration",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "adaptiveAcceleration",
+                                        "options": {
+                                            "abLogic": "DISABLED",
+                                            "enableBrotliCompression": true,
+                                            "enableForNoncacheable": false,
+                                            "enablePreconnect": true,
+                                            "enablePush": true,
+                                            "enableRo": false,
+                                            "preloadEnable": true,
+                                            "source": "MPULSE",
+                                            "titleHttp2ServerPush": "",
+                                            "titlePreconnect": "",
+                                            "titlePreload": "",
+                                            "titleRo": ""
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Automatically and continuously apply performance optimizations to your website using machine learning."
+                            }
+                        ],
+                        "behaviors": [],
+                        "criteria": [],
+                        "criteriaMustSatisfy": "all",
+                        "comments": "Control the settings related to improving the performance of delivering objects to your users."
+                    },
+                    {
+                        "name": "Strengthen security",
+                        "children": [
+                            {
+                                "name": "Allowed methods",
+                                "children": [
+                                    {
+                                        "name": "POST",
+                                        "children": [],
+                                        "behaviors": [
+                                            {
+                                                "name": "allowPost",
+                                                "options": {
+                                                    "allowWithoutContentLength": false,
+                                                    "enabled": true
+                                                }
+                                            }
+                                        ],
+                                        "criteria": [],
+                                        "criteriaMustSatisfy": "all",
+                                        "comments": "Allow use of the POST HTTP request method."
+                                    },
+                                    {
+                                        "name": "OPTIONS",
+                                        "children": [],
+                                        "behaviors": [
+                                            {
+                                                "name": "allowOptions",
+                                                "options": {
+                                                    "enabled": true
+                                                }
+                                            }
+                                        ],
+                                        "criteria": [],
+                                        "criteriaMustSatisfy": "all",
+                                        "comments": "Allow use of the OPTIONS HTTP request method."
+                                    },
+                                    {
+                                        "name": "PUT",
+                                        "children": [],
+                                        "behaviors": [
+                                            {
+                                                "name": "allowPut",
+                                                "options": {
+                                                    "enabled": false
+                                                }
+                                            }
+                                        ],
+                                        "criteria": [],
+                                        "criteriaMustSatisfy": "all",
+                                        "comments": "Allow use of the PUT HTTP request method."
+                                    },
+                                    {
+                                        "name": "DELETE",
+                                        "children": [],
+                                        "behaviors": [
+                                            {
+                                                "name": "allowDelete",
+                                                "options": {
+                                                    "enabled": false
+                                                }
+                                            }
+                                        ],
+                                        "criteria": [],
+                                        "criteriaMustSatisfy": "all",
+                                        "comments": "Allow use of the DELETE HTTP request method."
+                                    },
+                                    {
+                                        "name": "PATCH",
+                                        "children": [],
+                                        "behaviors": [
+                                            {
+                                                "name": "allowPatch",
+                                                "options": {
+                                                    "enabled": false
+                                                }
+                                            }
+                                        ],
+                                        "criteria": [],
+                                        "criteriaMustSatisfy": "all",
+                                        "comments": "Allow use of the PATCH HTTP request method."
+                                    }
+                                ],
+                                "behaviors": [
+                                    {
+                                        "name": "allHttpInCacheHierarchy",
+                                        "options": {
+                                            "enabled": true
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Allow the use of HTTP methods. Consider enabling additional methods under a path match for increased origin security."
+                            },
+                            {
+                                "name": "Obfuscate debug info",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "cacheTagVisible",
+                                        "options": {
+                                            "behavior": "PRAGMA_HEADER"
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Do not expose back-end information unless the request contains the Pragma debug header."
+                            },
+                            {
+                                "name": "Obfuscate backend info",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "modifyOutgoingResponseHeader",
+                                        "options": {
+                                            "action": "DELETE",
+                                            "customHeaderName": "X-Powered-By",
+                                            "standardDeleteHeaderName": "OTHER"
+                                        }
+                                    },
+                                    {
+                                        "name": "modifyOutgoingResponseHeader",
+                                        "options": {
+                                            "action": "DELETE",
+                                            "customHeaderName": "Server",
+                                            "standardDeleteHeaderName": "OTHER"
+                                        }
+                                    }
+                                ],
+                                "criteria": [
+                                    {
+                                        "name": "requestHeader",
+                                        "options": {
+                                            "headerName": "X-Akamai-Debug",
+                                            "matchCaseSensitiveValue": true,
+                                            "matchOperator": "IS_NOT_ONE_OF",
+                                            "matchWildcardName": false,
+                                            "matchWildcardValue": false,
+                                            "values": [
+                                                "true"
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Do not expose back-end information unless the request contains an additional secret header. Regularly change the criteria to use a specific unique value for the secret header."
+                            },
+                            {
+                                "name": "HSTS",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "httpStrictTransportSecurity",
+                                        "options": {
+                                            "enable": false
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Require all browsers to connect to your site using HTTPS."
+                            }
+                        ],
+                        "behaviors": [],
+                        "criteria": [],
+                        "criteriaMustSatisfy": "all",
+                        "comments": "Control the settings that minimize the information your website shares with clients and malicious entities to reduce your exposure to threats."
+                    },
+                    {
+                        "name": "Increase availability",
+                        "children": [
+                            {
+                                "name": "Simulate failover",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "breakConnection",
+                                        "options": {
+                                            "enabled": true
+                                        }
+                                    }
+                                ],
+                                "criteria": [
+                                    {
+                                        "name": "contentDeliveryNetwork",
+                                        "options": {
+                                            "matchOperator": "IS",
+                                            "network": "STAGING"
+                                        }
+                                    },
+                                    {
+                                        "name": "requestHeader",
+                                        "options": {
+                                            "headerName": "breakconnection",
+                                            "matchCaseSensitiveValue": true,
+                                            "matchOperator": "IS_ONE_OF",
+                                            "matchWildcardName": false,
+                                            "matchWildcardValue": false,
+                                            "values": [
+                                                "Your-Secret-Here"
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Simulate an origin connection problem and test the site failover configuration on the CDN staging network."
+                            },
+                            {
+                                "name": "Site failover",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "failAction",
+                                        "options": {
+                                            "enabled": false
+                                        }
+                                    }
+                                ],
+                                "criteria": [
+                                    {
+                                        "name": "originTimeout",
+                                        "options": {
+                                            "matchOperator": "ORIGIN_TIMED_OUT"
+                                        }
+                                    }
+                                ],
+                                "criteriaMustSatisfy": "any",
+                                "comments": "Specify how edge servers respond when the origin is not available."
+                            },
+                            {
+                                "name": "Origin health",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "healthDetection",
+                                        "options": {
+                                            "maximumReconnects": 2,
+                                            "retryCount": 3,
+                                            "retryInterval": "10s"
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Monitor the health of your origin by tracking unsuccessful IP connection attempts."
+                            },
+                            {
+                                "name": "Script management",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "scriptManagement",
+                                        "options": {
+                                            "enabled": false
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Enable Script Management to minimize performance and availability impacts from third-party JavaScripts."
+                            }
+                        ],
+                        "behaviors": [],
+                        "criteria": [],
+                        "criteriaMustSatisfy": "all",
+                        "comments": "Control how to respond when your origin or third parties are slow or even down to minimize the negative impact on user experience."
+                    },
+                    {
+                        "name": "Minimize payload",
+                        "children": [
+                            {
+                                "name": "Compressible objects",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "gzipResponse",
+                                        "options": {
+                                            "behavior": "ALWAYS"
+                                        }
+                                    }
+                                ],
+                                "criteria": [
+                                    {
+                                        "name": "contentType",
+                                        "options": {
+                                            "matchCaseSensitive": false,
+                                            "matchOperator": "IS_ONE_OF",
+                                            "matchWildcard": true,
+                                            "values": [
+                                                "application/*javascript*",
+                                                "application/*json*",
+                                                "application/*xml*",
+                                                "application/text*",
+                                                "application/vnd-ms-fontobject",
+                                                "application/vnd.microsoft.icon",
+                                                "application/x-font-opentype",
+                                                "application/x-font-truetype",
+                                                "application/x-font-ttf",
+                                                "font/eot*",
+                                                "font/opentype",
+                                                "font/otf",
+                                                "image/svg+xml",
+                                                "image/vnd.microsoft.icon",
+                                                "image/x-icon",
+                                                "text/*",
+                                                "application/octet-stream*",
+                                                "application/x-font-eot*",
+                                                "font/ttf",
+                                                "application/font-ttf",
+                                                "application/font-sfnt",
+                                                "application/x-tgif"
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "criteriaMustSatisfy": "all",
+                                "comments": "Serve gzip compressed content for text-based formats."
+                            }
+                        ],
+                        "behaviors": [],
+                        "criteria": [],
+                        "criteriaMustSatisfy": "all",
+                        "comments": "Control the settings that reduce the size of the delivered content and decrease the number of bytes sent by your properties. This allows you to cut down the network overhead of your website or API."
+                    },
+                    {
+                        "name": "Harper Redirects and Early Hints",
+                        "children": [
+                            {
+                                "name": "EdgeWorker Enable",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "edgeWorker",
+                                        "options": {
+                                            "continueOnError": true,
+                                            "continueOnErrorDisclaimer": "",
+                                            "createEdgeWorker": "",
+                                            "edgeWorkerId": "103630",
+                                            "enabled": true,
+                                            "failOpenTitle": "",
+                                            "mPulse": false,
+                                            "mPulseInformation": "",
+                                            "mPulseTitle": "",
+                                            "resourceTier": ""
+                                        }
+                                    }
+                                ],
+                                "criteria": [],
+                                "criteriaMustSatisfy": "any",
+                                "comments": ""
+                            },
+                            {
+                                "name": "Early Hints",
+                                "children": [],
+                                "behaviors": [
+                                    {
+                                        "name": "earlyHints",
+                                        "options": {
+                                            "enabled": true,
+                                            "resourceUrl": "{{user.PMUSER_103_HINTS}}"
+                                        }
+                                    }
+                                ],
+                                "criteria": [
+                                    {
+                                        "name": "matchVariable",
+                                        "options": {
+                                            "matchCaseSensitive": true,
+                                            "matchOperator": "IS_ONE_OF",
+                                            "matchWildcard": false,
+                                            "variableName": "PMUSER_103_HINTS_ENABLED",
+                                            "variableValues": [
+                                                "true",
+                                                "True"
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "criteriaMustSatisfy": "all",
+                                "comments": ""
+                            }
+                        ],
+                        "behaviors": [],
+                        "criteria": [],
+                        "criteriaMustSatisfy": "all",
+                        "comments": ""
+                    }
+                ],
+                "behaviors": [
+                    {
+                        "name": "origin",
+                        "options": {
+                            "originType": "NET_STORAGE",
+                            "netStorage": {
+                                "cpCode": 79168,
+                                "downloadDomainName": "psapps.download.akamai.com",
+                                "g2oToken": null
+                            }
+                        }
+                    },
+                    {
+                        "name": "caching",
+                        "options": {
+                            "behavior": "MAX_AGE",
+                            "mustRevalidate": false,
+                            "ttl": "30d"
+                        }
+                    }
+                ],
+                "options": {
+                    "is_secure": true
+                },
+                "variables": [
+                    {
+                        "name": "PMUSER_103_HINTS",
+                        "value": "",
+                        "description": "",
+                        "hidden": false,
+                        "sensitive": false
+                    },
+                    {
+                        "name": "PMUSER_103_HINTS_ENABLED",
+                        "value": "",
+                        "description": "",
+                        "hidden": false,
+                        "sensitive": false
+                    }
+                ],
+                "comments": "The Default Rule template contains all the necessary and recommended behaviors. Rules are evaluated from top to bottom and the last matching rule wins."
+            },
+            "warnings": [
+                {
+                    "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/need_feature",
+                    "errorLocation": "#/rules/behaviors/0",
+                    "detail": "For NetStorage `Origin Server`, Cache Key Query Parameters needs to be set to IGNORE_ALL. NetStorage doesn't honor query strings, so it should be set to avoid duplicate cache keys for the same object."
+                },
+                {
+                    "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/need_feature",
+                    "errorLocation": "#/rules/behaviors/0",
+                    "detail": "When your `Origin Server` is set to NetStorage, enable Cache HTTP Error Responses with a TTL of at least 30 seconds."
+                },
+                {
+                    "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/validation_message.general_warning",
+                    "errorLocation": "#/rules/children/0/children/2/criteria/0",
+                    "detail": "Matching on `Request Type` requires thorough understanding of the way Akamai Edge servers process requests.  If you are unsure about how this will affect your property, please contact your Akamai Technical representative, and please test thoroughly on staging before activating on production."
+                },
+                {
+                    "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/validation_message.http3_enabled_warning_reuse",
+                    "errorLocation": "#/rules/children/1/children/1/behaviors/1",
+                    "detail": "HTTP/3 connection reuse lets clients re-use an open connection for any domain included in your certificate, even if these domains point to different origins. Most browsers will perform a DNS query to ensure there's an overlap in the domain's IP before reusing the connection. If you're using multiple certificates, specifically both Standard TLS and Enhanced TLS, don't include the same domain across them. If you do, an HTTP request to the domain that requires Enhanced TLS could be resolved using the less secure Standard TLS certificate, and vice-versa."
+                },
+                {
+                    "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/need_feature",
+                    "errorLocation": "#/rules/children/1/children/1/behaviors/4",
+                    "detail": "`SureRoute` requires the No store option in Caching."
+                },
+                {
+                    "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/need_feature",
+                    "errorLocation": "#/rules/children/2/children/3/behaviors/0",
+                    "detail": "Enabling preload makes future downgrade to HTTP difficult."
+                }
+            ],
+            "ruleFormat": "latest",
+            "comments": "test config",
+            "defaultCPCode": {
+                "id": 1915962,
+                "description": "cpcode-Mjc0NTcxMjQtNjAy",
+                "products": [
+                    "Fresca"
+                ],
+                "createdDate": 1763146725000,
+                "cpCodeLimits": null,
+                "name": "cpcode-Mjc0NTcxMjQtNjAy"
+            }
+        },
+        "activation": {
+            "activation": "skipped"
+        }
+    },
+    "timestamp": "2025-12-06T00:09:34.310530Z"
+}
