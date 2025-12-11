@@ -40,9 +40,11 @@ pip install requests akamai-edgegrid
 
 ---
 
-# 2. Project Structure
+# 2. Project Structure and - [Architecture Overview]
 
 ```
+[Architecture Overview](ARCHITECTURE.md)
+
 harperEarlyAutomation/
 │
 ├── main.py
