@@ -62,6 +62,18 @@ harperEarlyAutomation/
           ├── bundle.json
 ```
 
+## Architecture Flow — Harper Early Hints + Redirect (Akamai + GTM)
+
+```mermaid
+flowchart LR
+    A[User / Actor] --> B[Akamai Property Manager - www.customer.com]
+    B --> C[EdgeWorker onClientRequest]
+    C --> D[Internal Harper Property Manager - harper.customer.com]
+    D --> E[GTM - Global Traffic Manager]
+    E --> F1[Harper Instance 1]
+    E --> F2[Harper Instance 2]
+    E --> F3[Harper Instance 3]
+    E --> F4[Harper Instance 4]
 ---
 
 # 3. Configuration (requirements.json)
@@ -119,21 +131,6 @@ Example:
 ---
 
 # 4. Running the Automation
-
-## Architecture Flow — Harper Early Hints + Redirect (Akamai + GTM)
-
-```mermaid
-flowchart LR
-    A[User / Actor] --> B[Akamai Property Manager - www.customer.com]
-    B --> C[EdgeWorker onClientRequest]
-    C --> D[Internal Harper Property Manager - harper.customer.com]
-    D --> E[GTM - Global Traffic Manager]
-    E --> F1[Harper Instance 1]
-    E --> F2[Harper Instance 2]
-    E --> F3[Harper Instance 3]
-    E --> F4[Harper Instance 4]
-
-
 
 ### Basic usage:
 
