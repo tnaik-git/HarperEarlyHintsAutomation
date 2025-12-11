@@ -125,24 +125,14 @@ Example:
 ```mermaid
 flowchart LR
     A[User / Actor] --> B[Akamai Property Manager - www.customer.com]
-
     B --> C[EdgeWorker onClientRequest]
-
     C --> D[Internal Harper Property Manager - harper.customer.com]
-
     D --> E[GTM - Global Traffic Manager]
-
     E --> F1[Harper Instance 1]
     E --> F2[Harper Instance 2]
     E --> F3[Harper Instance 3]
     E --> F4[Harper Instance 4]
 
-    %% Style Definitions
-    classDef akamai fill:#e8f0fe,stroke:#3366cc,stroke-width:2px,color:#000;
-    classDef harper fill:#e8ffe8,stroke:#228b22,stroke-width:2px,color:#000;
-
-    class B,C,D,E akamai;
-    class F1,F2,F3,F4 harper;
 
 
 ### Basic usage:
