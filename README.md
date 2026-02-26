@@ -13,7 +13,7 @@ This tool streamlines all required Akamai workflows into a **single Python-based
 - Unified activation logic (`staging`, `production`, or `saveonly`)  
 - Optional verbose logging  
 - Optional accountSwitchKey support  
-- Auto-repair of missing or incomplete requirements.json fields  
+
 
 ---
 
