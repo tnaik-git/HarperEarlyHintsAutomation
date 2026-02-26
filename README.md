@@ -83,7 +83,7 @@ Example:
   "datacenterDetails": "data/datacenters.csv",
   "gtmPropertyName": "test2-gtm",
   "gtmDomain": "tnaik1.com.hdb.akadns.net",
-  "livenessHostHeader": "mcy-pb-prod-gtm.harperdbcloud.com",
+  "livenessHostHeader": "pb-prod-gtm.harperdbcloud.com",
   "livenessTestObject": "/status",
 
   "propertyManager": {
@@ -102,8 +102,8 @@ Example:
       "internalPmConfigName": "13internal-harper-xxx.test.com",
       "internalHostname": "internal-harper-xxx.test.com",
       "edgeHostname": "ion-standard.tnaik.com.edgekey.net",
-      "originHostname": "edm-rd-prod-gtm.edmunds.com.hdb.akadns.net",
-      "forwardCustomHeader": "edm-rd-prod-gtm.harperdbcloud.com"
+      "originHostname": "test2-gtm.tnaik1.com.hdb.akadns.net",
+      "forwardCustomHeader": "pb-prod-gtm.harperdbcloud.com"
     }
   },
 
