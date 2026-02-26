@@ -4,7 +4,7 @@ This document provides a clear architectural overview of the Harper Early Hints 
 
 ---
 
-## Architecture Flow Diagram
+## Request Flow Diagram
 
 ```mermaid
 flowchart LR
