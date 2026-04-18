@@ -2,6 +2,7 @@ import json
 import requests
 import sys
 from helpers import dbg
+import os, json, copy
 
 
 # ===================================================================
@@ -289,7 +290,45 @@ def upload_rules(session, baseurl, propertyId,
     print("[SUCCESS] Uploaded rule tree.")
     return 1
 
+# ===================================================================
+# INJECT HARPER CACHING RULE
+# ===================================================================
+def inject_harper_caching_rule(rules, harper_caching_cfg, verbose):
+    """
+    Adds 'Harper Caching Setup' as a child rule on the default rule
+    when harperCaching.enabled is true.
+    """
+    if not harper_caching_cfg or not harper_caching_cfg.get("enabled"):
+        dbg(verbose, "Harper caching flag disabled — skipping.")
+        return rules
 
+    paths = harper_caching_cfg.get("paths") or ["/handler"]
+    ttl   = harper_caching_cfg.get("ttl", "1h")
+
+    template_path = "data/harper_caching_rule.json"
+    if not os.path.exists(template_path):
+        raise FileNotFoundError(f"Caching template missing: {template_path}")
+
+    with open(template_path, "r") as f:
+        rule = json.load(f)
+
+    # Substitute TTL
+    for b in rule["behaviors"]:
+        if b["name"] == "caching":
+            b["options"]["ttl"] = ttl
+
+    # Substitute path list
+    for c in rule["criteria"]:
+        if c["name"] == "path":
+            c["options"]["values"] = list(paths)
+
+    # Idempotent: replace if already present
+    children = rules.setdefault("children", [])
+    children[:] = [c for c in children if c.get("name") != "Harper Caching Setup"]
+    children.append(rule)
+
+    print(f"[SUCCESS] Injected Harper Caching Setup (paths={paths}, ttl={ttl})")
+    return rules
 
 # ===================================================================
 # ACTIVATE PROPERTY VERSION
@@ -391,9 +430,13 @@ def run_pm_workflow(session, baseurl, config, activationMode, accountSwitchKey, 
         remove_enhanced_debug(rules, verbose)
         update_cpcode_in_traffic_reporting(rules, cpcodeId, cpcodeName, verbose)
 
+        # Optional: Harper caching rule (flag-driven)
+        inject_harper_caching_rule(rules, cfg.get("harperCaching"), verbose)
+
         # ========================================================
         # UPLOAD UPDATED RULE TREE
         # ========================================================
+
         new_version = upload_rules(
             session, baseurl, propertyId,
             contractId, groupId, rules,

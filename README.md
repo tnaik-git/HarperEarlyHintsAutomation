@@ -1,4 +1,4 @@
-# Harper EarlyHints & Redirect Automation
+# 🌐 Harper EarlyHints & Redirect Automation
 
 Automation framework for deploying the full Harper EarlyHints + Redirect stack across Akamai GTM, Property Manager (internal + customer-facing), and EdgeWorkers.
 
@@ -9,15 +9,16 @@ This tool streamlines all required Akamai workflows into a **single Python-based
 - GTM Property creation + liveness test configuration  
 - Internal PM config creation  
 - EdgeWorker packaging, upload, and activation  
+- EdgeWorker source from **local files or GitHub repository**
 - Customer-facing PM rule injection (Harper EarlyHints + Redirect logic)  
 - Unified activation logic (`staging`, `production`, or `saveonly`)  
+- Skip flags to resume partial runs without re-running completed steps
 - Optional verbose logging  
 - Optional accountSwitchKey support  
 
-
 ---
 
-# 1. Prerequisites
+# 🚀 1. Prerequisites
 
 ### ✔ Python 3.8+
 ### ✔ Akamai EdgeGrid credentials
@@ -32,7 +33,7 @@ client_secret = ...
 access_token = ...
 ```
 
-### Install dependencies
+### ✔ Install dependencies
 
 ```
 pip install requests akamai-edgegrid
@@ -40,11 +41,9 @@ pip install requests akamai-edgegrid
 
 ---
 
-# 2. Project Structure and - [Architecture Overview]
+# 📁 2. Project Structure
 
 ```
-[Architecture Overview](ARCHITECTURE.md)
-
 harperEarlyAutomation/
 │
 ├── main.py
@@ -63,47 +62,51 @@ harperEarlyAutomation/
           ├── main.js
           ├── bundle.json
 ```
+
 ---
 
-# 3. Configuration (requirements.json)
+# 🧩 3. Configuration (requirements.json)
 
-You must provide (or the tool will prompt for) required fields.
-
-Example:
+Full example with all supported fields:
 
 ```json
 {
-  "activationEmails": "tnaik@akamai.com",
-  "changesBasedOnVersion#": 174,
+  "activationEmails": "you@example.com",
 
-  "accountId": "act_1-6JHGX",
-  "contractId": "ctr_1-1NC95D",
-  "groupId": "grp_65552",
+  "accountId": "act_1-XXXXX",
+  "contractId": "ctr_1-XXXXX",
+  "groupId": "grp_XXXXX",
+
+  "skipGtm": false,
+  "existingGtmDomain": "",
+
+  "skipPm": false,
+  "existingInternalPropertyId": "",
+
+  "skipEdgeworker": false,
 
   "datacenterDetails": "data/datacenters.csv",
-  "gtmPropertyName": "test2-gtm",
-  "gtmDomain": "tnaik1.com.hdb.akadns.net",
-  "livenessHostHeader": "pb-prod-gtm.harperdbcloud.com",
+  "gtmPropertyName": "my-gtm-property",
+  "gtmDomain": "example.com.hdb.akadns.net",
+  "livenessHostHeader": "mcy-pb-prod-gtm.harperdbcloud.com",
   "livenessTestObject": "/status",
 
   "propertyManager": {
     "productId": "prd_SPM",
     "ruleFormat": "latest",
     "customerFacingHostname": {
-      "propertyId": "prp_476348",
-      "propertyName": "tnaik-ion-standard",
-      "propertyVersion": 174,
+      "propertyName": "my-customer-property",
+      "propertyVersion": 1,
       "propertyHostnames": [
-        "mcy-rd-prod-gtm.tnaik.com",
-        "mcy-rd-prod-gtm2.tnaik.com"
+        "www.example.com"
       ]
     },
     "internalHarperHostname": {
-      "internalPmConfigName": "13internal-harper-xxx.test.com",
+      "internalPmConfigName": "internal-harper-xxx.test.com",
       "internalHostname": "internal-harper-xxx.test.com",
-      "edgeHostname": "ion-standard.tnaik.com.edgekey.net",
-      "originHostname": "test2-gtm.tnaik1.com.hdb.akadns.net",
-      "forwardCustomHeader": "pb-prod-gtm.harperdbcloud.com"
+      "edgeHostname": "ion-standard.example.com.edgekey.net",
+      "originHostname": "origin.example.com.hdb.akadns.net",
+      "forwardCustomHeader": "origin.harperdbcloud.com"
     }
   },
 
@@ -111,37 +114,107 @@ Example:
     "name": "Harper-Earlyhints",
     "description": "harperEarlyhints",
     "resourceTierId": 200,
-    "tgz": "examples/versions-post.tgz",
-    "harper_token": "xxxxxxx"
+    "harper_token": "YOUR_AUTH_TOKEN_HERE",
+    "github": {
+      "enabled": false,
+      "repo": "akamai/edgeworkers-examples",
+      "branch": "master",
+      "main_js_path": "edgecompute/examples/103-early-hints/basic/main.js",
+      "bundle_json_path": "edgecompute/examples/103-early-hints/basic/bundle.json",
+      "token": ""
+    }
   }
 }
 ```
 
 ---
 
-# 4. Running the Automation
+# 🛠 4. CLI Flags
 
-### Basic usage:
+| Flag | Description |
+|---|---|
+| `--activation-network` | **Required.** `staging`, `production`, or `saveonly` |
+| `--account-switch-key` | Optional Akamai accountSwitchKey |
+| `--verbose` | Enable detailed debug logging |
+| `--skip-gtm` | Skip GTM workflow, reuse existing domain |
+| `--skip-pm` | Skip internal Property Manager workflow |
+| `--skip-edgeworker` | Skip EdgeWorker creation, reuse existing EW ID |
+| `--github-bundle` | Pull `main.js` + `bundle.json` from GitHub instead of local files |
 
+---
+
+# ▶️ 5. Running the Automation
+
+### Full run — everything from scratch:
+```bash
+python3 main.py --activation-network staging \
+  --account-switch-key <your-key>
 ```
-python3 main.py --activation-network staging
+
+### Save only — no activation:
+```bash
+python3 main.py --activation-network saveonly \
+  --account-switch-key <your-key>
 ```
 
-### Full CLI options:
-
+### Skip GTM — reuse existing domain:
+```bash
+python3 main.py --activation-network staging \
+  --account-switch-key <your-key> \
+  --skip-gtm
 ```
-python3 main.py --activation-network <staging|production|saveonly> \
-                --account-switch-key <optional-ask> \
-                --verbose
+
+### Skip GTM + PM — only run EdgeWorker + Harper rule:
+```bash
+python3 main.py --activation-network staging \
+  --account-switch-key <your-key> \
+  --skip-gtm \
+  --skip-pm
+```
+
+### Skip everything except Harper rule injection:
+```bash
+python3 main.py --activation-network saveonly \
+  --account-switch-key <your-key> \
+  --skip-gtm \
+  --skip-pm \
+  --skip-edgeworker
+```
+> Requires `edgeworker.existingEdgeWorkerId` set in `requirements.json`.
+
+### Pull EdgeWorker bundle from GitHub:
+```bash
+python3 main.py --activation-network saveonly \
+  --account-switch-key <your-key> \
+  --skip-gtm \
+  --skip-pm \
+  --github-bundle
+```
+
+### Full run with GitHub bundle + verbose logging:
+```bash
+python3 main.py --activation-network staging \
+  --account-switch-key <your-key> \
+  --github-bundle \
+  --verbose
+```
+
+### Production deploy with GitHub bundle:
+```bash
+python3 main.py --activation-network production \
+  --account-switch-key <your-key> \
+  --skip-gtm \
+  --skip-pm \
+  --github-bundle
 ```
 
 ---
 
-# 5. What the Script Does
+# 🔄 6. What the Script Does
 
 Each run executes these components **in order**:
 
-###  GTM Workflow
+### 1️⃣ GTM Workflow _(skippable with `--skip-gtm`)_
 - Detect if GTM domain exists
 - Create domain (unless contractAccessProblem → manual prompt)
 - Load datacenters from CSV
@@ -149,93 +222,125 @@ Each run executes these components **in order**:
 - Create/Update GTM property
 - Wait for propagation
 
-### Internal PM Workflow
+### 2️⃣ Internal PM Workflow _(skippable with `--skip-pm`)_
 - Create CP Code  
 - Create internal PM config  
 - Add Edge Hostname  
 - Update origin behavior  
-- Remove “enhancedDebug” and “Offload origin” children  
-- Update CP Code in “Traffic reporting”  
+- Remove "enhancedDebug" and "Offload origin" children  
+- Update CP Code in "Traffic reporting"  
 - Upload new version  
 - Activate if staging/production  
 
-### EdgeWorker Workflow
-- Update main.js by injecting Harper token + hostname  
-- Create .tgz bundle  
-- Create EdgeWorker ID  
-- Upload version  
-- Activate (unless saveonly)  
+### 3️⃣ EdgeWorker Workflow _(skippable with `--skip-edgeworker`)_
+- **[Optional]** Fetch `main.js` + `bundle.json` from GitHub (`--github-bundle`)
+- Inject Harper token + internal hostname into `main.js`
+- Create `.tgz` bundle
+- Create new EdgeWorker ID
+- Upload version
+- Activate (unless saveonly)
 
-### Customer-Facing PM Workflow
+### 4️⃣ Customer-Facing PM Workflow _(always runs if EW ID is available)_
 - Fetch rule tree for customer-facing property  
-- Inject Harper Redirect + EarlyHints rule  
+- Load Harper Redirect + EarlyHints rule template
+- Inject new EdgeWorker ID into rule
 - Insert Harper rule before Conditional Origins / Advanced Override  
-- Create new version  
+- Create new property version  
 - Upload updated rule tree  
-- Activate depending on activationNetwork  
+- Activate depending on `--activation-network`
 
 ---
 
-# 6. Output (result.json)
+# 🐙 7. GitHub Bundle Source
 
-Each run appends an object:
+Instead of using local `data/edgeworker/main.js` and `bundle.json`, you can pull directly from a GitHub repository.
+
+**Configure in `requirements.json`:**
+```json
+"edgeworker": {
+  "github": {
+    "enabled": false,
+    "repo": "akamai/edgeworkers-examples",
+    "branch": "master",
+    "main_js_path": "edgecompute/examples/103-early-hints/basic/main.js",
+    "bundle_json_path": "edgecompute/examples/103-early-hints/basic/bundle.json",
+    "token": ""
+  }
+}
+```
+
+- Leave `enabled: false` and use `--github-bundle` CLI flag to enable per run
+- Or set `enabled: true` to always pull from GitHub
+- `token` is only needed for private repositories
+
+---
+
+# 📄 8. Output (result.json)
+
+Written after every run:
 
 ```json
-[
-  {
-    "timestamp": "2025-12-05T03:12:00Z",
-    "gtm": { },
-    "propertyManager": { },
-    "edgeworker": { },
-    "harperRule": { }
+{
+  "timestamp": "2026-04-02T12:00:00Z",
+  "customerFacingPropertyId": "prp_XXXXXX",
+  "customerFacingPropertyVersion": 1,
+  "gtm": { },
+  "propertyManager": { },
+  "edgeworker": {
+    "edgeWorkerId": 106819,
+    "version": "1.0",
+    "activation": "skipped (saveonly)"
+  },
+  "harperRule": {
+    "newVersion": 9,
+    "activation": { }
   }
-]
+}
 ```
 
 ---
 
-# 7. Verbose Logging
+# 🧪 9. Verbose Logging
 
-Enable detailed output:
+Enable detailed output with `--verbose`:
 
-```
---verbose
-```
-
-Shows:
-- API URLs  
-- Payloads  
-- Responses  
-- Logic paths  
+- API URLs and query params
+- Request payloads
+- Response bodies
+- Logic paths and variable values
 
 ---
 
-# Troubleshooting
+# ❗ 10. Troubleshooting
 
 ### 403 on GTM Domain Creation
-You may need to manually create the GTM domain. The script will prompt you.
+You may not have API permission to create GTM domains. The script will print manual instructions. Create the domain in Akamai Control Center then rerun with `--skip-gtm`.
 
-### Datacenter Already Exists
-The script will ask:
+### Property name already in use
+A previous run already created the internal PM property. Use `--skip-pm` to skip creation and reuse it.
 
+### EW ID limit reached (EW3002)
+Your account has hit the Akamai EdgeWorker ID cap. Delete unused EdgeWorker IDs in Akamai Control Center, then rerun.
+
+### Datacenter already exists
+The script will prompt:
 ```
-Reuse existing datacenter Winterfell? (yes/no)
+Reuse existing datacenter '<name>'? (yes/no)
 ```
 
-### Missing fields
-The script interactively updates requirements.json.
+### GitHub fetch fails (404)
+Check that `repo`, `branch`, and file paths in `requirements.json` are correct. For private repos, set `token`.
 
 ---
 
-# Summary
+# 🎉 Summary
 
 This automation fully deploys:
 
 - GTM Domain + Datacenters  
 - GTM Property  
 - Internal PM Config  
-- EdgeWorker  
-- Customer PM Rule Tree  
+- EdgeWorker (from local files or GitHub)
+- Customer PM Rule Tree with Harper EarlyHints + Redirect
 
-All orchestrated to deliver the **Harper EarlyHints + Redirect** solution in one execution.
-
+All orchestrated to deliver the **Harper EarlyHints + Redirect** solution in one execution, with full flexibility to skip completed steps on reruns.

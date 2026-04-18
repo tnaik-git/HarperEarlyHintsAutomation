@@ -669,7 +669,7 @@
                 {
                     "name": "removeVary",
                     "options": {
-                        "enabled": false
+                        "enabled": true
                     }
                 },
                 {

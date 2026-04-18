@@ -3,6 +3,7 @@ import re
 import json
 import tarfile
 import logging
+import requests
 from urllib.parse import urljoin
 
 from helpers import dbg
@@ -18,11 +19,9 @@ def update_main_js(requirements_json, main_js_file, verbose):
     dbg(verbose, f"Updating main.js → {main_js_file}")
     logger.info(f"[STEP] Updating main.js using {requirements_json}")
 
-    # Load config
     with open(requirements_json, "r") as f:
         req = json.load(f)
 
-    # Extract internal hostname + token
     internal_hostname = req["propertyManager"]["internalHarperHostname"]["internalHostname"]
     harper_token = req["edgeworker"]["harper_token"]
 
@@ -31,25 +30,21 @@ def update_main_js(requirements_json, main_js_file, verbose):
     dbg(verbose, f"New HARPPER_TOKEN = {harper_token}")
     dbg(verbose, f"New SUBREQUEST_BASE_URL = {new_subrequest_base}")
 
-    # Read main.js
     with open(main_js_file, "r") as f:
         content = f.read()
 
-    # Replace HARPPER_TOKEN
     content = re.sub(
         r"const HARPPER_TOKEN\s*=\s*'.*?';",
         f"const HARPPER_TOKEN = '{harper_token}';",
         content
     )
 
-    # Replace URL
     content = re.sub(
         r"const SUBREQUEST_BASE_URL\s*=\s*'.*?';",
         f"const SUBREQUEST_BASE_URL = '{new_subrequest_base}';",
         content
     )
 
-    # Save updated file
     with open(main_js_file, "w") as f:
         f.write(content)
 
@@ -77,7 +72,6 @@ def create_bundle(source_folder, output_tgz, verbose):
         raise FileNotFoundError(f"bundle.json not found at {bundle_json_path}")
 
     with tarfile.open(output_tgz, "w:gz") as tgz:
-        # root of tar should look like: main.js, bundle.json
         tgz.add(main_js_path, arcname="main.js")
         tgz.add(bundle_json_path, arcname="bundle.json")
 
@@ -101,7 +95,7 @@ def create_edgeworker_id(session, baseurl, name, groupId, resourceTierId, descri
 
     payload = {
         "name": name,
-        "groupId": groupId,             # numeric groupId (no grp_)
+        "groupId": groupId,
         "resourceTierId": resourceTierId,
         "description": description
     }
@@ -164,7 +158,6 @@ def upload_edgeworker_version(session, baseurl, ew_id, tgz_file, accountSwitchKe
         raise Exception(result.text)
 
     version = result.json().get("version")
-
     logger.info(f"[SUCCESS] Version uploaded: {version}")
     dbg(verbose, f"Uploaded version = {version}")
 
@@ -212,6 +205,49 @@ def activate_edgeworker(session, baseurl, ew_id, version, network, accountSwitch
 
 
 # =========================================================
+# FETCH EDGEWORKER FILES FROM GITHUB
+# =========================================================
+def fetch_from_github(gh_config, edgeworker_folder, verbose):
+    repo   = gh_config.get("repo", "")
+    branch = gh_config.get("branch", "main")
+    token  = gh_config.get("token", "")
+
+    if not repo:
+        raise ValueError("edgeworker.github.repo is required when GitHub source is enabled.")
+
+    base_url = f"https://raw.githubusercontent.com/{repo}/{branch}"
+    headers  = {"Accept": "application/vnd.github.v3.raw"}
+    if token:
+        headers["Authorization"] = f"token {token}"
+
+    files_to_fetch = {
+        "main.js":     gh_config.get("main_js_path", "main.js"),
+        "bundle.json": gh_config.get("bundle_json_path", "bundle.json"),
+    }
+
+    os.makedirs(edgeworker_folder, exist_ok=True)
+
+    for local_name, remote_path in files_to_fetch.items():
+        url = f"{base_url}/{remote_path}"
+        print(f"[INFO] Fetching {local_name} from GitHub → {repo}/{branch}/{remote_path}")
+        resp = requests.get(url, headers=headers, timeout=15)
+
+        if resp.status_code == 404:
+            raise FileNotFoundError(f"GitHub file not found: {url}")
+        if resp.status_code == 401:
+            raise PermissionError("GitHub 401 — set edgeworker.github.token for private repos.")
+        if resp.status_code != 200:
+            raise Exception(f"GitHub fetch failed ({resp.status_code}): {resp.text}")
+
+        dest = os.path.join(edgeworker_folder, local_name)
+        with open(dest, "w") as f:
+            f.write(resp.text)
+        print(f"[SUCCESS] Saved {local_name} → {dest}")
+
+    logger.info("[SUCCESS] GitHub source files downloaded.")
+
+
+# =========================================================
 # RUN WORKFLOW
 # =========================================================
 def run_edgeworker_workflow(session, baseurl, config, activationMode, accountSwitchKey, verbose):
@@ -222,7 +258,7 @@ def run_edgeworker_workflow(session, baseurl, config, activationMode, accountSwi
     # Paths
     requirements_json = "requirements.json"
     edgeworker_folder = "data/edgeworker"
-    main_js = os.path.join(edgeworker_folder, "main.js")
+    main_js    = os.path.join(edgeworker_folder, "main.js")
     bundle_path = os.path.join(edgeworker_folder, "edgeworker_bundle.tgz")
 
     # groupId = "grp_xxx" → EdgeWorkers require numeric
@@ -233,13 +269,32 @@ def run_edgeworker_workflow(session, baseurl, config, activationMode, accountSwi
 
     results = {}
 
-    # STEP 1 – update JS
+    # -------------------------------------------------------
+    # STEP 0 – optionally pull source files from GitHub
+    # -------------------------------------------------------
+    gh_config  = ew_info.get("github", {})
+    use_github = gh_config.get("enabled", False)
+
+    if use_github:
+        print("[INFO] GitHub source enabled — fetching EdgeWorker files from repo...")
+        fetch_from_github(gh_config, edgeworker_folder, verbose)
+        print("[INFO] GitHub fetch complete. Proceeding with bundle creation.\n")
+    else:
+        print("[INFO] Using local EdgeWorker source files.")
+
+    # -------------------------------------------------------
+    # STEP 1 – inject token + hostname into main.js
+    # -------------------------------------------------------
     update_main_js(requirements_json, main_js, verbose)
 
-    # STEP 2 – create bundle
+    # -------------------------------------------------------
+    # STEP 2 – create .tgz bundle
+    # -------------------------------------------------------
     create_bundle(edgeworker_folder, bundle_path, verbose)
 
-    # STEP 3 – create EW ID
+    # -------------------------------------------------------
+    # STEP 3 – create EdgeWorker ID
+    # -------------------------------------------------------
     ew_id = create_edgeworker_id(
         session=session,
         baseurl=baseurl,
@@ -252,7 +307,9 @@ def run_edgeworker_workflow(session, baseurl, config, activationMode, accountSwi
     )
     results["edgeWorkerId"] = ew_id
 
+    # -------------------------------------------------------
     # STEP 4 – upload version
+    # -------------------------------------------------------
     version = upload_edgeworker_version(
         session=session,
         baseurl=baseurl,
@@ -263,7 +320,9 @@ def run_edgeworker_workflow(session, baseurl, config, activationMode, accountSwi
     )
     results["version"] = version
 
-    # STEP 5 – activation (based on CLI activationMode)
+    # -------------------------------------------------------
+    # STEP 5 – activate (based on CLI activationMode)
+    # -------------------------------------------------------
     mode = activationMode.lower()
 
     if mode == "saveonly":

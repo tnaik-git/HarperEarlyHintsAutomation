@@ -1,22 +1,726 @@
 {
     "customerFacingPropertyId": "prp_1293814",
     "customerFacingPropertyVersion": 1,
+    "gtm": {
+        "domain": {
+            "defaultErrorPenalty": 75,
+            "defaultSslClientCertificate": null,
+            "defaultSslClientPrivateKey": null,
+            "defaultTimeoutPenalty": 25,
+            "deleteRequestId": null,
+            "emailNotificationList": [
+                "tnaik@akamai.com"
+            ],
+            "lastModified": "2026-04-15T18:10:30.598+00:00",
+            "lastModifiedBy": "tnaik",
+            "loadFeedback": false,
+            "modificationComments": "Edit Property demo-gtm-test2",
+            "name": "tnaik1.com.hdb.akadns.net",
+            "type": "basic",
+            "status": {
+                "message": "Current configuration has been propagated to all GTM nameservers",
+                "changeId": "a8fd30a5-d9ce-47d8-98c3-4fe23129eb7c",
+                "propagationStatus": "COMPLETE",
+                "propagationStatusDate": "2026-04-15T18:11:00.000+00:00",
+                "passingValidation": true,
+                "links": [
+                    {
+                        "rel": "self",
+                        "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/status/current"
+                    }
+                ]
+            },
+            "loadImbalancePercentage": 10.0,
+            "resources": [],
+            "properties": [
+                {
+                    "backupCName": null,
+                    "backupIp": null,
+                    "balanceByDownloadScore": false,
+                    "cname": null,
+                    "comments": null,
+                    "dynamicTTL": 60,
+                    "failoverDelay": 0,
+                    "failbackDelay": 0,
+                    "handoutMode": "normal",
+                    "healthMax": null,
+                    "healthMultiplier": null,
+                    "healthThreshold": null,
+                    "lastModified": "2026-04-02T22:17:48.716+00:00",
+                    "livenessTests": [
+                        {
+                            "disableNonstandardPortWarning": false,
+                            "hostHeader": "mcy-pb-prod-gtm.harperdbcloud.com",
+                            "httpError3xx": false,
+                            "httpError4xx": false,
+                            "httpError5xx": false,
+                            "name": "Liveness",
+                            "requestString": null,
+                            "responseString": null,
+                            "testInterval": 60,
+                            "testObject": "/status",
+                            "testObjectPort": 443,
+                            "testObjectProtocol": "HTTPS",
+                            "testObjectUsername": null,
+                            "testObjectPassword": null,
+                            "testTimeout": 10.0,
+                            "sslClientCertificate": null,
+                            "sslClientPrivateKey": null
+                        }
+                    ],
+                    "loadImbalancePercentage": null,
+                    "mapName": null,
+                    "maxUnreachablePenalty": null,
+                    "mxRecords": [],
+                    "name": "demo-gtm-test1",
+                    "scoreAggregationType": "worst",
+                    "stickinessBonusConstant": null,
+                    "stickinessBonusPercentage": null,
+                    "staticTTL": null,
+                    "trafficTargets": [
+                        {
+                            "datacenterId": 3,
+                            "enabled": true,
+                            "weight": 50.0,
+                            "handoutCName": null,
+                            "name": null,
+                            "servers": [
+                                "173.255.198.32",
+                                "45.56.68.13"
+                            ]
+                        },
+                        {
+                            "datacenterId": 4,
+                            "enabled": true,
+                            "weight": 50.0,
+                            "handoutCName": null,
+                            "name": null,
+                            "servers": [
+                                "173.255.198.32",
+                                "45.56.68.13"
+                            ]
+                        }
+                    ],
+                    "type": "performance",
+                    "unreachableThreshold": null,
+                    "useComputedTargets": false,
+                    "ipv6": false,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/properties/demo-gtm-test1"
+                        }
+                    ]
+                },
+                {
+                    "backupCName": null,
+                    "backupIp": null,
+                    "balanceByDownloadScore": false,
+                    "cname": null,
+                    "comments": null,
+                    "dynamicTTL": 60,
+                    "failoverDelay": 0,
+                    "failbackDelay": 0,
+                    "handoutMode": "normal",
+                    "healthMax": null,
+                    "healthMultiplier": null,
+                    "healthThreshold": null,
+                    "lastModified": "2025-12-05T04:58:15.406+00:00",
+                    "livenessTests": [
+                        {
+                            "disableNonstandardPortWarning": false,
+                            "hostHeader": "mcy-pb-prod-gtm.harperdbcloud.com",
+                            "httpError3xx": false,
+                            "httpError4xx": false,
+                            "httpError5xx": false,
+                            "name": "Liveness",
+                            "requestString": null,
+                            "responseString": null,
+                            "testInterval": 60,
+                            "testObject": "/status",
+                            "testObjectPort": 443,
+                            "testObjectProtocol": "HTTPS",
+                            "testObjectUsername": null,
+                            "testObjectPassword": null,
+                            "testTimeout": 10.0,
+                            "sslClientCertificate": null,
+                            "sslClientPrivateKey": null
+                        }
+                    ],
+                    "loadImbalancePercentage": null,
+                    "mapName": null,
+                    "maxUnreachablePenalty": null,
+                    "mxRecords": [],
+                    "name": "test-gtm",
+                    "scoreAggregationType": "worst",
+                    "stickinessBonusConstant": 0,
+                    "stickinessBonusPercentage": 0,
+                    "staticTTL": null,
+                    "trafficTargets": [
+                        {
+                            "datacenterId": 13,
+                            "enabled": true,
+                            "weight": 50.0,
+                            "handoutCName": null,
+                            "name": null,
+                            "servers": [
+                                "173.255.198.32",
+                                "45.56.68.13"
+                            ]
+                        },
+                        {
+                            "datacenterId": 14,
+                            "enabled": true,
+                            "weight": 50.0,
+                            "handoutCName": null,
+                            "name": null,
+                            "servers": [
+                                "173.255.198.32",
+                                "45.56.68.13"
+                            ]
+                        }
+                    ],
+                    "type": "performance",
+                    "unreachableThreshold": null,
+                    "useComputedTargets": false,
+                    "ipv6": false,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/properties/test-gtm"
+                        }
+                    ]
+                },
+                {
+                    "backupCName": null,
+                    "backupIp": null,
+                    "balanceByDownloadScore": false,
+                    "cname": null,
+                    "comments": null,
+                    "dynamicTTL": 60,
+                    "failoverDelay": 0,
+                    "failbackDelay": 0,
+                    "handoutMode": "normal",
+                    "healthMax": null,
+                    "healthMultiplier": null,
+                    "healthThreshold": null,
+                    "lastModified": "2026-02-25T22:46:55.864+00:00",
+                    "livenessTests": [
+                        {
+                            "disableNonstandardPortWarning": false,
+                            "hostHeader": "mcy-pb-prod-gtm.harperdbcloud.com",
+                            "httpError3xx": false,
+                            "httpError4xx": false,
+                            "httpError5xx": false,
+                            "name": "Liveness",
+                            "requestString": null,
+                            "responseString": null,
+                            "testInterval": 60,
+                            "testObject": "/status",
+                            "testObjectPort": 443,
+                            "testObjectProtocol": "HTTPS",
+                            "testObjectUsername": null,
+                            "testObjectPassword": null,
+                            "testTimeout": 10.0,
+                            "sslClientCertificate": null,
+                            "sslClientPrivateKey": null
+                        }
+                    ],
+                    "loadImbalancePercentage": null,
+                    "mapName": null,
+                    "maxUnreachablePenalty": null,
+                    "mxRecords": [],
+                    "name": "demo-gtm-test",
+                    "scoreAggregationType": "worst",
+                    "stickinessBonusConstant": 0,
+                    "stickinessBonusPercentage": 0,
+                    "staticTTL": null,
+                    "trafficTargets": [
+                        {
+                            "datacenterId": 16,
+                            "enabled": true,
+                            "weight": 50.0,
+                            "handoutCName": null,
+                            "name": null,
+                            "servers": [
+                                "173.255.198.32",
+                                "45.56.68.13"
+                            ]
+                        },
+                        {
+                            "datacenterId": 15,
+                            "enabled": true,
+                            "weight": 50.0,
+                            "handoutCName": null,
+                            "name": null,
+                            "servers": [
+                                "173.255.198.32",
+                                "45.56.68.13"
+                            ]
+                        }
+                    ],
+                    "type": "performance",
+                    "unreachableThreshold": null,
+                    "useComputedTargets": false,
+                    "ipv6": false,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/properties/demo-gtm-test"
+                        }
+                    ]
+                },
+                {
+                    "backupCName": null,
+                    "backupIp": null,
+                    "balanceByDownloadScore": false,
+                    "cname": null,
+                    "comments": null,
+                    "dynamicTTL": 60,
+                    "failoverDelay": 0,
+                    "failbackDelay": 0,
+                    "handoutMode": "normal",
+                    "healthMax": null,
+                    "healthMultiplier": null,
+                    "healthThreshold": null,
+                    "lastModified": "2026-04-15T18:10:29.438+00:00",
+                    "livenessTests": [
+                        {
+                            "disableNonstandardPortWarning": false,
+                            "hostHeader": "mcy-pb-prod-gtm.harperdbcloud.com",
+                            "httpError3xx": false,
+                            "httpError4xx": false,
+                            "httpError5xx": false,
+                            "name": "Liveness",
+                            "requestString": null,
+                            "responseString": null,
+                            "testInterval": 60,
+                            "testObject": "/status",
+                            "testObjectPort": 443,
+                            "testObjectProtocol": "HTTPS",
+                            "testObjectUsername": null,
+                            "testObjectPassword": null,
+                            "testTimeout": 10.0,
+                            "sslClientCertificate": null,
+                            "sslClientPrivateKey": null
+                        }
+                    ],
+                    "loadImbalancePercentage": null,
+                    "mapName": null,
+                    "maxUnreachablePenalty": null,
+                    "mxRecords": [],
+                    "name": "demo-gtm-test2",
+                    "scoreAggregationType": "worst",
+                    "stickinessBonusConstant": null,
+                    "stickinessBonusPercentage": null,
+                    "staticTTL": null,
+                    "trafficTargets": [
+                        {
+                            "datacenterId": 3,
+                            "enabled": true,
+                            "weight": 50.0,
+                            "handoutCName": null,
+                            "name": null,
+                            "servers": [
+                                "173.255.198.32",
+                                "45.56.68.13"
+                            ]
+                        },
+                        {
+                            "datacenterId": 4,
+                            "enabled": true,
+                            "weight": 50.0,
+                            "handoutCName": null,
+                            "name": null,
+                            "servers": [
+                                "173.255.198.32",
+                                "45.56.68.13"
+                            ]
+                        }
+                    ],
+                    "type": "performance",
+                    "unreachableThreshold": null,
+                    "useComputedTargets": false,
+                    "ipv6": false,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/properties/demo-gtm-test2"
+                        }
+                    ]
+                }
+            ],
+            "datacenters": [
+                {
+                    "datacenterId": 4,
+                    "nickname": "DemoHarper4",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/4"
+                        }
+                    ]
+                },
+                {
+                    "datacenterId": 1,
+                    "nickname": "Winterfell25",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/1"
+                        }
+                    ]
+                },
+                {
+                    "datacenterId": 12,
+                    "nickname": "Winterfell45",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/12"
+                        }
+                    ]
+                },
+                {
+                    "datacenterId": 2,
+                    "nickname": "Winterfell26",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/2"
+                        }
+                    ]
+                },
+                {
+                    "datacenterId": 15,
+                    "nickname": "DemoHarper1",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/15"
+                        }
+                    ]
+                },
+                {
+                    "datacenterId": 13,
+                    "nickname": "Winterfell46",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/13"
+                        }
+                    ]
+                },
+                {
+                    "datacenterId": 16,
+                    "nickname": "DemoHarper2",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/16"
+                        }
+                    ]
+                },
+                {
+                    "datacenterId": 11,
+                    "nickname": "Winterfell44",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/11"
+                        }
+                    ]
+                },
+                {
+                    "datacenterId": 14,
+                    "nickname": "Winterfell47",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/14"
+                        }
+                    ]
+                },
+                {
+                    "datacenterId": 3,
+                    "nickname": "DemoHarper3",
+                    "city": "Troy",
+                    "stateOrProvince": "GA",
+                    "country": "US",
+                    "latitude": 56.185097,
+                    "longitude": -4.050264,
+                    "cloneOf": null,
+                    "defaultLoadObject": null,
+                    "continent": null,
+                    "cloudServerTargeting": false,
+                    "virtual": true,
+                    "links": [
+                        {
+                            "rel": "self",
+                            "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters/3"
+                        }
+                    ]
+                }
+            ],
+            "geographicMaps": [],
+            "cidrMaps": [],
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net"
+                },
+                {
+                    "rel": "datacenters",
+                    "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/datacenters"
+                },
+                {
+                    "rel": "properties",
+                    "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/properties"
+                },
+                {
+                    "rel": "geographic-maps",
+                    "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/geographic-maps"
+                },
+                {
+                    "rel": "cidr-maps",
+                    "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/cidr-maps"
+                },
+                {
+                    "rel": "resources",
+                    "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/resources"
+                }
+            ]
+        },
+        "datacentersCreated": 2,
+        "gtmProperty": {
+            "resource": {
+                "backupCName": null,
+                "backupIp": null,
+                "balanceByDownloadScore": false,
+                "cname": null,
+                "comments": null,
+                "dynamicTTL": 60,
+                "failoverDelay": null,
+                "failbackDelay": null,
+                "ghostDemandReporting": false,
+                "handoutMode": "normal",
+                "handoutLimit": 1,
+                "healthMax": null,
+                "healthMultiplier": null,
+                "healthThreshold": null,
+                "lastModified": "2026-04-15T18:13:42.508+00:00",
+                "livenessTests": [
+                    {
+                        "answersRequired": false,
+                        "disabled": false,
+                        "disableNonstandardPortWarning": false,
+                        "errorPenalty": null,
+                        "hostHeader": "mcy-pb-prod-gtm.harperdbcloud.com",
+                        "httpHeaders": [
+                            {
+                                "name": "Host",
+                                "value": "mcy-pb-prod-gtm.harperdbcloud.com"
+                            }
+                        ],
+                        "httpError3xx": false,
+                        "httpError4xx": false,
+                        "httpError5xx": false,
+                        "httpMethod": "GET",
+                        "httpRequestBody": null,
+                        "name": "Liveness",
+                        "peerCertificateVerification": true,
+                        "pre2023SecurityPosture": false,
+                        "requestString": null,
+                        "responseString": null,
+                        "resourceType": null,
+                        "recursionRequested": false,
+                        "testInterval": 60,
+                        "testObject": "/status",
+                        "testObjectPort": 443,
+                        "testObjectProtocol": "HTTPS",
+                        "testObjectUsername": null,
+                        "testObjectPassword": null,
+                        "testTimeout": 10.0,
+                        "timeoutPenalty": null,
+                        "sslClientCertificate": null,
+                        "sslClientPrivateKey": null,
+                        "alternateCACertificates": null
+                    }
+                ],
+                "loadImbalancePercentage": null,
+                "mapName": null,
+                "maxUnreachablePenalty": null,
+                "minLiveFraction": null,
+                "minActiveDatacenterFraction": null,
+                "mxRecords": [],
+                "name": "demo-gtm-test2",
+                "scoreAggregationType": "worst",
+                "stickinessBonusConstant": null,
+                "stickinessBonusPercentage": null,
+                "stateChangeNotificationWebhook": null,
+                "staticTTL": null,
+                "staticRRSets": [],
+                "trafficTargets": [
+                    {
+                        "datacenterId": 3,
+                        "enabled": true,
+                        "weight": 50.0,
+                        "precedence": null,
+                        "handoutCName": null,
+                        "name": null,
+                        "servers": [
+                            "173.255.198.32",
+                            "45.56.68.13"
+                        ]
+                    },
+                    {
+                        "datacenterId": 4,
+                        "enabled": true,
+                        "weight": 50.0,
+                        "precedence": null,
+                        "handoutCName": null,
+                        "name": null,
+                        "servers": [
+                            "173.255.198.32",
+                            "45.56.68.13"
+                        ]
+                    }
+                ],
+                "type": "performance",
+                "unreachableThreshold": null,
+                "useComputedTargets": false,
+                "weightedHashBitsForIPv4": null,
+                "weightedHashBitsForIPv6": null,
+                "ipv6": false,
+                "links": [
+                    {
+                        "rel": "self",
+                        "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/properties/demo-gtm-test2"
+                    }
+                ]
+            },
+            "status": {
+                "message": "Change Pending",
+                "changeId": "00a4cf5a-0cd2-460c-811f-e1ccf1f4e542",
+                "propagationStatus": "PENDING",
+                "propagationStatusDate": "2026-04-15T18:13:43.404+00:00",
+                "passingValidation": true,
+                "links": [
+                    {
+                        "rel": "self",
+                        "href": "https://akab-bcluo3csng6cahgy-7ctwgu3ffall7zbs.luna.akamaiapis.net/config-gtm/v1/domains/tnaik1.com.hdb.akadns.net/status/current"
+                    }
+                ]
+            }
+        },
+        "propagationWait": true
+    },
     "propertyManager": null,
     "edgeworker": {
-        "edgeWorkerId": 103630,
-        "version": "1.0",
+        "edgeWorkerId": 107187,
+        "version": "1.0.0",
         "activation": "skipped (saveonly)"
     },
     "harperRule": {
-        "newVersion": 4,
+        "newVersion": 16,
         "updateResponse": {
             "accountId": "act_1-6JHGX",
             "contractId": "ctr_1-1NC95D",
             "groupId": "grp_191342",
             "propertyId": "prp_1293814",
             "propertyName": "testharper.191342.tnaik-ion-standard",
-            "propertyVersion": 4,
-            "etag": "b0e4e723714f2db35a00f64c8218ba274e5afa9e",
+            "propertyVersion": 16,
+            "etag": "da74b61b65b10696a2f052dc1f1547c832ddea9d",
             "rules": {
                 "name": "default",
                 "children": [
@@ -654,7 +1358,7 @@
                                             "continueOnError": true,
                                             "continueOnErrorDisclaimer": "",
                                             "createEdgeWorker": "",
-                                            "edgeWorkerId": "103630",
+                                            "edgeWorkerId": "107187",
                                             "enabled": true,
                                             "failOpenTitle": "",
                                             "mPulse": false,
@@ -782,19 +1486,19 @@
             "ruleFormat": "latest",
             "comments": "test config",
             "defaultCPCode": {
-                "id": 1915962,
-                "description": "cpcode-Mjc0NTcxMjQtNjAy",
+                "id": 1992457,
+                "description": "cpcode-MzkzNzA2NzctNzEz",
                 "products": [
                     "Fresca"
                 ],
-                "createdDate": 1763146725000,
+                "createdDate": 1775060278000,
                 "cpCodeLimits": null,
-                "name": "cpcode-Mjc0NTcxMjQtNjAy"
+                "name": "cpcode-MzkzNzA2NzctNzEz"
             }
         },
         "activation": {
             "activation": "skipped"
         }
     },
-    "timestamp": "2025-12-06T00:09:34.310530Z"
+    "timestamp": "2026-04-15T18:14:48.519955Z"
 }

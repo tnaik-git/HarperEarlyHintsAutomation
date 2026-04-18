@@ -1,0 +1,35 @@
+{
+    "name": "Harper Caching Setup",
+    "children": [],
+    "behaviors": [
+      {
+        "name": "caching",
+        "options": {
+          "behavior": "MAX_AGE",
+          "ttl": "{{TTL}}",
+          "mustRevalidate": false
+        }
+      },
+      { "name": "tieredDistribution", "options": { "enabled": true, "tieredDistributionMap": "CH2" } },
+      { "name": "validateEntityTag", "options": { "enabled": false } },
+      { "name": "removeVary", "options": { "enabled": true } },
+      { "name": "cacheError", "options": { "enabled": true, "preserveStale": true, "ttl": "10s" } },
+      { "name": "cacheKeyQueryParams", "options": { "behavior": "INCLUDE_ALL_ALPHABETIZE_ORDER" } },
+      { "name": "prefreshCache", "options": { "enabled": true, "prefreshval": 90 } },
+      { "name": "downstreamCache", "options": { "allowBehavior": "LESSER", "behavior": "ALLOW", "sendHeaders": "CACHE_CONTROL", "sendPrivate": false } },
+      { "name": "modifyViaHeader", "options": { "enabled": true, "modificationOption": "REMOVE_HEADER" } }
+    ],
+    "criteria": [
+      {
+        "name": "path",
+        "options": {
+          "matchOperator": "MATCHES_ONE_OF",
+          "matchCaseSensitive": false,
+          "normalize": false,
+          "values": ["{{PATHS}}"]
+        }
+      }
+    ],
+    "criteriaMustSatisfy": "all",
+    "comments": "Harper caching for early-hints / redirect handler responses."
+  }

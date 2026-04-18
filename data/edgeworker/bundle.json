@@ -1,13 +1,4 @@
 {
-    "edgeworker-version": "1.0",
-    "description" : "harper-redirect-prod -- Redirect and Early hints",
-    "config": {
-        "logging": {
-            "level": "error"
-        },
-        "subrequest": {
-            "invoke-for-edgeworker-clients": false
-        },
-        "client-ip-header": false
-    }
+    "edgeworker-version": "1.0.0",
+    "description" : "EdgeWorker enabling 103 Early hints and configuring the list of Resource Hints"
 }

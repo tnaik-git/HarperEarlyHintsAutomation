@@ -356,8 +356,12 @@ def create_gtm_property(session, baseurl, domain, config, datacenters, contractI
 # ============================================================
 # MAIN WORKFLOW
 # ============================================================
-def run_gtm_workflow(session, baseurl, config, activationMode, accountSwitchKey, verbose):
+def run_gtm_workflow(session, baseurl, config, activationMode, accountSwitchKey, verbose, skip_gtm=False):
     print("\n>>> ENTER: run_gtm_workflow()")
+    if skip_gtm:
+        domain = config.get("existingGtmDomainPropertyName") or config.get("gtmDomain")
+        print(f"[INFO] GTM skipped. Reusing existing domain: {domain}")
+        return {"skipped": True, "domain": domain}
 
     session_verbose = {"verbose": verbose}
 
@@ -371,8 +375,12 @@ def run_gtm_workflow(session, baseurl, config, activationMode, accountSwitchKey,
     domain_details = get_gtm_domain(session, baseurl, domain, accountSwitchKey)
 
     if not domain_details:
+        if config.get("existingGtmDomainPropertyName"):
+            raise Exception(
+                f"existingGtmDomainPropertyName '{domain}' was specified but "
+                f"not found via API. Verify the domain name is correct."
+            )
         print(f"[INFO] Domain '{domain}' does not exist — attempting create...")
-
         try:
             domain_details = create_gtm_domain(
                 session, baseurl, config,
@@ -384,7 +392,6 @@ def run_gtm_workflow(session, baseurl, config, activationMode, accountSwitchKey,
             else:
                 print(f"[ERROR] Unexpected GTM domain creation error: {e}")
                 sys.exit(1)
-
     # ============================================================
     # Step 1 — Load CSV Datacenters
     # ============================================================
